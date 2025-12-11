@@ -5,7 +5,7 @@ COPY . .
 RUN gradle build -x test
 
 # 2. Runtime stage
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=builder /home/app/build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
