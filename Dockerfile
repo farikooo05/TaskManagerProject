@@ -5,16 +5,14 @@ FROM node:20 AS frontend-builder
 WORKDIR /app/frontend
 
 COPY TaskManagerFrontend/package*.json ./
-
 RUN npm ci --include=dev
 
 COPY TaskManagerFrontend .
 
-# FIX vite permission issue
+# Fix vite permission issue
 RUN chmod +x node_modules/.bin/vite
 
 RUN npm run build
-
 
 
 ###############################################
@@ -23,7 +21,7 @@ RUN npm run build
 FROM gradle:8.5-jdk21 AS backend-builder
 WORKDIR /app
 
-# Copy backend project (root)
+# Copy backend root project
 COPY . .
 
 # Copy frontend build into Spring Boot static folder
@@ -31,8 +29,9 @@ COPY --from=frontend-builder /app/frontend/dist ./src/main/resources/static/
 
 RUN gradle clean bootJar --no-daemon
 
+
 ###############################################
-# 3. Final runtime image
+# 3. Runtime stage
 ###############################################
 FROM eclipse-temurin:21-jre
 WORKDIR /app

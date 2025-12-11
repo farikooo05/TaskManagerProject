@@ -34,7 +34,16 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/index.html",
+                                "/static/**",
+                                "/assets/**",
+                                "/signup",
+                                "/login",
+                                "/taskmanagerfrontend/**",
+                                "/favicon.ico"
+                        ).permitAll()
                         .requestMatchers("/employees/signup", "/employees/login").permitAll()
                         .anyRequest().authenticated()
                 )
