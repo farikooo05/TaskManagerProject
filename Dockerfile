@@ -6,13 +6,15 @@ WORKDIR /app/frontend
 
 COPY TaskManagerFrontend/package*.json ./
 
-# Install dependencies INCLUDING devDependencies (important for Vite!)
 RUN npm ci --include=dev
 
 COPY TaskManagerFrontend .
 
-# Now Vite exists -> build succeeds
+# FIX vite permission issue
+RUN chmod +x node_modules/.bin/vite
+
 RUN npm run build
+
 
 
 ###############################################
