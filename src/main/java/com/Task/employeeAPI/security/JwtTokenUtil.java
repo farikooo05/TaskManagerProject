@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class JwtTokenUtil {
 
-    @Value("my-secret-key")
+    @Value("my-secret-key-asdasd-asdasd-asdasd")
     private String secret;
 
     @Value("360000")
