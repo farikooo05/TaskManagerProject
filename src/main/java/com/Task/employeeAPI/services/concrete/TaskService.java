@@ -94,14 +94,14 @@ public class TaskService implements ITaskService {
         taskWorkflow.setUpdatedBy(updatedBy);
         taskWorkflowRepository.save(taskWorkflow);
 
-        // Send Kafka notification
-        notificationProducer.sendNotification(
-                new NotificationDTO(
-                        employee.getEmail(),
-                        "You were assigned with new task",
-                        task.getDescription()
-                )
-        );
+//        // Send Kafka notification
+//        notificationProducer.sendNotification(
+//                new NotificationDTO(
+//                        employee.getEmail(),
+//                        "You were assigned with new task",
+//                        task.getDescription()
+//                )
+//        );
 
         // 🔥 OUTPUT: use ModelMapper ONLY for response
         TaskDTO dto = modelMapper.map(task, TaskDTO.class);
@@ -185,13 +185,13 @@ public class TaskService implements ITaskService {
 
         taskRepository.save(task);
 
-        notificationProducer.sendNotification(
-                new NotificationDTO(
-                        employee.getEmail(),
-                        "Task updated",
-                        "Task '" + task.getTitle() + "' was updated."
-                )
-        );
+//        notificationProducer.sendNotification(
+//                new NotificationDTO(
+//                        employee.getEmail(),
+//                        "Task updated",
+//                        "Task '" + task.getTitle() + "' was updated."
+//                )
+//        );
 
         TaskDTO dto = modelMapper.map(task, TaskDTO.class);
         dto.setEmployee(modelMapper.map(employee, EmployeeDTO.class));
