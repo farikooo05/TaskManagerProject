@@ -116,7 +116,7 @@ export default function TeamBoard() {
                             {/* Status and Priority row */}
                             <div className="flex items-center justify-between w-full mb-2">
                               <StatusBadge status={task.status} />
-                              {/*<PriorityBadge priority={task.priority} />*/}
+                              <PriorityBadge priority={task.priority} />
                             </div>
 
 
